@@ -35,5 +35,5 @@ application.start()
 
 ```
 
-The name Sprout doesn't mean anything. I just got the name from @an-hun-qu and
-thought it sounded cool.
+The name Sprout doesn't mean anything. I just got the name from [@milieu-x](https://github.com/milieu-x)
+and thought it sounded cool.
