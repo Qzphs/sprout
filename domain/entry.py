@@ -8,10 +8,10 @@ class Entry(Widget):
 
     def __init__(self, parent):
         super().__init__(parent)
-        self.variable = tkinter.StringVar(self.base)
-        self.entry = tkinter.Entry(self.base, textvariable=self.variable)
-        self.entry.pack()
+        self._variable = tkinter.StringVar(self.base)
+        self._entry = tkinter.Entry(self.base, textvariable=self._variable)
+        self._entry.pack()
 
     @property
     def value(self):
-        return self.entry.get()
+        return self._entry.get()

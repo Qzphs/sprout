@@ -1,5 +1,6 @@
 import tkinter
 
+from domain.constants import NW
 from domain.widget import Container
 
 
@@ -20,34 +21,34 @@ class ScrollableFrame(Container):
 
         super().__init__(parent)
 
-        self.scrollbar = tkinter.Scrollbar(
+        self._scrollbar = tkinter.Scrollbar(
             self.base,
             orient=tkinter.VERTICAL,
         )
-        self.scrollbar.pack(side=tkinter.RIGHT, fill=tkinter.Y)
+        self._scrollbar.pack(side=tkinter.RIGHT, fill=tkinter.Y)
 
-        self.canvas = tkinter.Canvas(
+        self._canvas = tkinter.Canvas(
             self.base,
             bd=0,
             highlightthickness=0,
             width=outer_width,
             height=outer_height,
             scrollregion=(0, 0, inner_width, inner_height),
-            yscrollcommand=self.scrollbar.set,
+            yscrollcommand=self._scrollbar.set,
         )
-        self.canvas.pack(side=tkinter.LEFT, fill=tkinter.BOTH)
-        self.scrollbar.config(command=self.canvas.yview)
+        self._canvas.pack(side=tkinter.LEFT, fill=tkinter.BOTH)
+        self._scrollbar.config(command=self._canvas.yview)
 
         self.frame = tkinter.Frame(
-            self.canvas,
+            self._canvas,
             width=inner_width,
             height=inner_height,
         )
         self.frame.pack(fill=tkinter.BOTH)
-        self.canvas.create_window(
+        self._canvas.create_window(
             0,
             0,
-            anchor=tkinter.NW,
+            anchor=NW,
             width=inner_width,
             height=inner_height,
             window=self.frame,

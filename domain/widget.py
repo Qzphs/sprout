@@ -1,5 +1,7 @@
 import tkinter
 
+from domain.constants import NW
+
 
 class Widget:
     """Base class for Sprout widgets."""
@@ -14,8 +16,11 @@ class Widget:
         supported by Sprout.
         """
 
-    def place(self, x: int, y: int, anchor: str = tkinter.NW):
+    def place(self, x: int, y: int, anchor: str = NW):
         self.base.place(x=x, y=y, anchor=anchor)
+
+    def destroy(self):
+        self.base.destroy()
 
 
 class Container(Widget):

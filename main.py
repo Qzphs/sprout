@@ -20,14 +20,16 @@ class File:
 
     def save(self, filename: str):
         with open(filename, "w") as file:
-            file.write("# Sprout v0.1 https://github.com/Qzphs/sprout\n\n\n")
+            file.write("# Sprout v0.2 https://github.com/Qzphs/sprout\n\n\n")
             file.write("\n".join(self.import_lines) + "\n")
             file.write("\n".join(self.code_lines) + "\n")
 
 
 file = File()
 
+file.add("domain/constants.py")
 file.add("domain/font.py")
+file.add("domain/image.py")
 file.add("domain/widget.py")
 
 file.add("domain/application.py")
