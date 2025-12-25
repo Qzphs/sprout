@@ -1,6 +1,6 @@
 import tkinter
 
-from domain.widget import Container
+from domain.widget import Container, Widget
 
 
 class Application:
@@ -40,3 +40,4 @@ class Screen(Container):
             height=parent.height,
         )
         self.frame = self.base
+        self.children: list[Widget] = []

@@ -20,7 +20,7 @@ class File:
 
     def save(self, filename: str):
         with open(filename, "w") as file:
-            file.write("# Sprout v0.2 https://github.com/Qzphs/sprout\n\n\n")
+            file.write("# Sprout v0.2.1 https://github.com/Qzphs/sprout\n\n\n")
             file.write("\n".join(self.import_lines) + "\n")
             file.write("\n".join(self.code_lines) + "\n")
 
