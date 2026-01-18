@@ -1,7 +1,7 @@
 import tkinter
 from typing import Callable
 
-from domain.widget import Container, Widget
+from sprout.widget import Container, Widget
 
 
 class Frame(Container):
@@ -11,23 +11,25 @@ class Frame(Container):
         super().__init__(parent)
         self.base.config(width=width, height=height)
         self.base.bind("<Button-1>", self._on_click)
-        self.command: Callable[[Widget], None] | None = None
+        self.on_click: Callable[[Widget], None] | None = None
 
     def _on_click(self, event: tkinter.Event):
-        if self.command is None:
+        if self.on_click is None:
             return
-        self.command(self)
+        self.on_click(self)
 
     @property
-    def border_colour(self):
+    def background_colour(self):
+        if self.base.cget("bg") == self.parent.base.cget("bg"):
+            return None
         return self.base.cget("bg")
 
-    @border_colour.setter
-    def border_colour(self, border_colour: str | None):
-        if border_colour is None:
+    @background_colour.setter
+    def background_colour(self, background_colour: str | None):
+        if background_colour is None:
             self.base.config(bg=self.parent.base.cget("bg"))
         else:
-            self.base.config(bg=border_colour)
+            self.base.config(bg=background_colour)
 
     @property
     def border_width(self):

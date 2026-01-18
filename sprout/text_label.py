@@ -1,8 +1,8 @@
 import tkinter
 from typing import Callable
 
-from domain.font import Font
-from domain.widget import Container, Widget
+from sprout.font import Font
+from sprout.widget import Container, Widget
 
 
 class TextLabel(Widget):
@@ -13,20 +13,20 @@ class TextLabel(Widget):
         self._label = tkinter.Label(self.base, text=text)
         self._label.bind("<Button-1>", self._on_click)
         self._label.pack()
-        self.command: Callable[[Widget], None] | None = None
+        self.on_click: Callable[[Widget], None] | None = None
 
     def _on_click(self, event: tkinter.Event):
-        if self.command is None:
+        if self.on_click is None:
             return
-        self.command(self)
+        self.on_click(self)
 
     @property
-    def text(self) -> str:
-        return self._label.cget("text")
+    def colour(self):
+        return self._label.cget("fg")
 
-    @text.setter
-    def text(self, text: str):
-        self._label.config(text=text)
+    @colour.setter
+    def colour(self, colour: str):
+        self._label.config(fg=colour)
 
     @property
     def font(self):
@@ -38,9 +38,9 @@ class TextLabel(Widget):
         self._label.config(font=font.tkinter())
 
     @property
-    def colour(self):
-        return self._label.cget("fg")
+    def text(self) -> str:
+        return self._label.cget("text")
 
-    @colour.setter
-    def colour(self, colour: str):
-        self._label.config(fg=colour)
+    @text.setter
+    def text(self, text: str):
+        self._label.config(text=text)

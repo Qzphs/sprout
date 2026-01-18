@@ -1,7 +1,7 @@
 import tkinter
 
-from domain.constants import NW
-from domain.widget import Container
+from sprout.constants import NW
+from sprout.widget import Container
 
 
 class ScrollableFrame(Container):

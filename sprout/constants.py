@@ -11,3 +11,5 @@ SW = tkinter.SW
 W = tkinter.W
 
 CENTRE = tkinter.CENTER
+
+OFFSCREEN = -2000

@@ -1,6 +1,7 @@
 import tkinter
 
-from domain.widget import Container, Widget
+from sprout.constants import OFFSCREEN
+from sprout.widget import Container, Widget
 
 
 class Application:
@@ -22,7 +23,7 @@ class Application:
         self.screen.place(x=0, y=0)
 
     def change_screen(self, screen: "Screen"):
-        self.screen.place(x=-self.width, y=0)
+        self.screen.place(x=OFFSCREEN, y=0)
         self.screen = screen
         self.screen.place(x=0, y=0)
 
@@ -41,3 +42,14 @@ class Screen(Container):
         )
         self.frame = self.base
         self.children: list[Widget] = []
+
+    @property
+    def background_colour(self):
+        return self.base.cget("bg")
+
+    @background_colour.setter
+    def background_colour(self, background_colour: str | None):
+        if background_colour is None:
+            self.base.config(bg=self.parent.tk.cget("bg"))
+        else:
+            self.base.config(bg=background_colour)

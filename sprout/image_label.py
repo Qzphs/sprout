@@ -1,8 +1,8 @@
 import tkinter
 from typing import Callable
 
-from domain.image import Image
-from domain.widget import Container, Widget
+from sprout.image import Image
+from sprout.widget import Container, Widget
 
 
 class ImageLabel(Widget):
@@ -14,15 +14,17 @@ class ImageLabel(Widget):
         self._image = image
         self._label.bind("<Button-1>", self._on_click)
         self._label.pack()
-        self.command: Callable[[Widget], None] | None = None
+        self.on_click: Callable[[Widget], None] | None = None
 
     def _on_click(self, event: tkinter.Event):
-        if self.command is None:
+        if self.on_click is None:
             return
-        self.command(self)
+        self.on_click(self)
 
     @property
     def border_colour(self):
+        if self.base.cget("bg") == self.parent.base.cget("bg"):
+            return None
         return self.base.cget("bg")
 
     @border_colour.setter

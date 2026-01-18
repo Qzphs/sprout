@@ -1,6 +1,6 @@
 import tkinter
 
-from domain.constants import NW
+from sprout.constants import NW
 
 
 class Widget:
