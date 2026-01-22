@@ -1,6 +1,7 @@
 import tkinter
 from typing import Callable
 
+from sprout.font import Font
 from sprout.widget import Container, Widget
 
 
@@ -17,6 +18,7 @@ class Dropdown(Widget):
         self._dropdown = tkinter.OptionMenu(self.base, self._variable, *options)
         self._dropdown.pack()
         self.on_write: Callable[[Widget], None] | None = None
+        self.font = Font.default()
 
     def _on_write(self, *args):
         if self.on_write is None:

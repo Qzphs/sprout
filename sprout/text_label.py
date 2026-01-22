@@ -14,6 +14,7 @@ class TextLabel(Widget):
         self._label.bind("<Button-1>", self._on_click)
         self._label.pack()
         self.on_click: Callable[[Widget], None] | None = None
+        self.font = Font.default()
 
     def _on_click(self, event: tkinter.Event):
         if self.on_click is None:

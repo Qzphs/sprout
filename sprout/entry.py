@@ -15,6 +15,7 @@ class Entry(Widget):
         self._entry = tkinter.Entry(self.base, textvariable=self._variable)
         self._entry.pack()
         self.on_write: Callable[[Widget], None] | None = None
+        self.font = Font.default()
 
     def _on_write(self, *args):
         if self.on_write is None:
