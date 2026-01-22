@@ -1,4 +1,5 @@
 import tkinter
+import tkinter.font
 from typing import Callable
 
 from sprout.font import Font
@@ -29,4 +30,11 @@ class Dropdown(Widget):
     def value(self):
         return self._variable.get()
 
-    # font does not seem to behave well on macOS
+    @property
+    def font(self):
+        tkinter_font = tkinter.font.nametofont(self._dropdown.cget("font"))
+        return Font.from_tkinter(tkinter_font)
+
+    @font.setter
+    def font(self, font: Font):
+        self._dropdown.config(font=font.tkinter())
