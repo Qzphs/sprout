@@ -17,6 +17,8 @@ class Application:
         self.tk = tkinter.Tk()
         self.tk.title(title)
         self.tk.geometry(f"{width}x{height}+{0}+{0}")
+        self.tk.createcommand("tk::mac::Quit", self._on_quit)
+        self.tk.protocol("WM_DELETE_WINDOW", self._on_quit)
         self.width = width
         self.height = height
         self.screen = Screen(self)
@@ -29,6 +31,14 @@ class Application:
 
     def start(self):
         self.tk.mainloop()
+
+    def _on_quit(self):
+        if self.on_quit is not None:
+            self.on_quit()
+        self.tk.quit()
+
+    def on_quit(self):
+        pass
 
 
 class Screen(Container):
