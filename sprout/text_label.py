@@ -1,4 +1,5 @@
 import tkinter
+import tkinter.font
 from typing import Callable
 
 from sprout.font import Font
@@ -31,8 +32,8 @@ class TextLabel(Widget):
 
     @property
     def font(self):
-        # TODO: return a sprout.Font instead of str
-        return self._label.cget("font")
+        tkinter_font = tkinter.font.nametofont(self._label.cget("font"))
+        return Font.from_tkinter(tkinter_font)
 
     @font.setter
     def font(self, font: Font):

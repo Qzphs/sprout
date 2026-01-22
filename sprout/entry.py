@@ -1,4 +1,5 @@
 import tkinter
+import tkinter.font
 from typing import Callable
 
 from sprout.font import Font
@@ -24,8 +25,8 @@ class Entry(Widget):
 
     @property
     def font(self):
-        # TODO: return a sprout.Font instead of str
-        return self._entry.cget("font")
+        tkinter_font = tkinter.font.nametofont(self._entry.cget("font"))
+        return Font.from_tkinter(tkinter_font)
 
     @font.setter
     def font(self, font: Font):
