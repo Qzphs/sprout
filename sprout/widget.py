@@ -1,6 +1,6 @@
 import tkinter
 
-from sprout.constants import NW
+from sprout.constants import LEFT, NW
 
 
 class Widget:
@@ -17,7 +17,7 @@ class Widget:
         """
         self.parent.children.append(self)
 
-    def pack(self, side: str = tkinter.LEFT):
+    def pack(self, side: str = LEFT):
         self.base.pack(side=side)
 
     def place(self, x: int, y: int, anchor: str = NW):
