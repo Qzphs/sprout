@@ -5,13 +5,7 @@ from sprout.widget import Container, Widget
 
 
 class Application:
-    """
-    Main class for GUIs using Sprout.
-
-    Single-screen GUIs can use the default screen (self.screen)
-    directly. Multi-screen GUIs can create their own screens and
-    show/hide them using self.change_screen().
-    """
+    """Main class for GUIs using Sprout."""
 
     def __init__(self, title: str, width: int, height: int):
         self.tk = tkinter.Tk()
@@ -21,13 +15,19 @@ class Application:
         self.tk.protocol("WM_DELETE_WINDOW", self._on_quit)
         self.width = width
         self.height = height
-        self.screen = Screen(self)
-        self.screen.place(x=0, y=0)
+        self._screen = Screen(self)
+        self._screen.place(x=0, y=0)
 
-    def change_screen(self, screen: "Screen"):
-        self.screen.place(x=OFFSCREEN, y=0)
-        self.screen = screen
-        self.screen.place(x=0, y=0)
+    @property
+    def screen(self):
+        """The screen currently being displayed."""
+        return self._screen
+
+    @screen.setter
+    def screen(self, screen: "Screen"):
+        self._screen.place(x=OFFSCREEN, y=0)
+        self._screen = screen
+        self._screen.place(x=0, y=0)
 
     def start(self):
         self.tk.mainloop()
