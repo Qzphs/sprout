@@ -1,6 +1,6 @@
 import tkinter
 
-from sprout.constants import OFFSCREEN
+from sprout.constants import LEFT, NW, OFFSCREEN
 from sprout.widget import Container, Widget
 
 
@@ -16,7 +16,7 @@ class Application:
         self.width = width
         self.height = height
         self._screen = Screen(self)
-        self._screen.place(x=0, y=0)
+        self._screen.base.place(x=0, y=0)
 
     @property
     def screen(self):
@@ -25,9 +25,9 @@ class Application:
 
     @screen.setter
     def screen(self, screen: "Screen"):
-        self._screen.place(x=OFFSCREEN, y=0)
+        self._screen.base.place(x=OFFSCREEN, y=0)
         self._screen = screen
-        self._screen.place(x=0, y=0)
+        self._screen.base.place(x=0, y=0)
 
     def start(self):
         self.tk.mainloop()
@@ -52,6 +52,12 @@ class Screen(Container):
         )
         self.frame = self.base
         self.children: list[Widget] = []
+
+    def pack(self, side=LEFT):
+        raise NotImplementedError("cannot pack screen")
+
+    def place(self, x, y, anchor=NW):
+        raise NotImplementedError("cannot place screen")
 
     @property
     def background_colour(self):
