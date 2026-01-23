@@ -35,6 +35,24 @@ class Font:
             strikethrough=tkinter_font.actual("overstrike"),
         )
 
+    def copy(
+        self,
+        family: str | None = None,
+        size: int | None = None,
+        bold: bool | None = None,
+        italic: bool | None = None,
+        underline: bool | None = None,
+        strikethrough: bool | None = None,
+    ):
+        return Font(
+            family=family if family is not None else self.family,
+            size=size if size is not None else self.size,
+            bold=bold if bold is not None else self.bold,
+            italic=italic if italic is not None else self.italic,
+            underline=underline if underline is not None else self.underline,
+            strikethrough=strikethrough if strikethrough is not None else strikethrough,
+        )
+
     def tkinter(self):
         return tkinter.font.Font(
             family=self.family,
