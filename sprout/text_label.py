@@ -46,3 +46,11 @@ class TextLabel(Widget):
     @text.setter
     def text(self, text: str):
         self._label.config(text=text)
+
+    @property
+    def wraplength(self) -> int:
+        return self._label.cget("wraplength")
+
+    @wraplength.setter
+    def wraplength(self, wraplength: int):
+        self._label.config(wraplength=wraplength)
