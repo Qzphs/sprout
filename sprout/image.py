@@ -4,7 +4,7 @@ import tkinter
 class Image:
 
     def __init__(self, base: tkinter.PhotoImage):
-        self.base = base
+        self._base = base
 
     @classmethod
     def from_file(cls, filename: str):
@@ -13,9 +13,9 @@ class Image:
     def subsample(self, x: int, y: int | None = None):
         if y is None:
             y = x
-        return Image(self.base.subsample(x=x, y=y))
+        return Image(self._base.subsample(x=x, y=y))
 
     def zoom(self, x: int, y: int | None = None):
         if y is None:
             y = x
-        return Image(self.base.zoom(x=x, y=y))
+        return Image(self._base.zoom(x=x, y=y))

@@ -12,11 +12,11 @@ class Dropdown(Widget):
     def __init__(self, parent: Container, options: list[str]):
         super().__init__(parent)
         assert len(options) > 0
-        self._variable = tkinter.StringVar(self.base)
+        self._variable = tkinter.StringVar(self._base)
         self._variable.set(options[0])
         self._variable.trace_add("write", self._on_write)
         self.options = options
-        self._dropdown = tkinter.OptionMenu(self.base, self._variable, *options)
+        self._dropdown = tkinter.OptionMenu(self._base, self._variable, *options)
         self._dropdown.pack()
         self.on_write: Callable[[Widget], None] | None = None
         self.font = Font.default()

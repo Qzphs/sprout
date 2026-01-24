@@ -11,9 +11,9 @@ class Entry(Widget):
 
     def __init__(self, parent):
         super().__init__(parent)
-        self._variable = tkinter.StringVar(self.base)
+        self._variable = tkinter.StringVar(self._base)
         self._variable.trace_add("write", self._on_write)
-        self._entry = tkinter.Entry(self.base, textvariable=self._variable)
+        self._entry = tkinter.Entry(self._base, textvariable=self._variable)
         self._entry.pack()
         self.on_write: Callable[[Widget], None] | None = None
         self.font = Font.default()

@@ -11,7 +11,7 @@ class TextLabel(Widget):
 
     def __init__(self, parent: Container, text: str):
         super().__init__(parent)
-        self._label = tkinter.Label(self.base, text=text)
+        self._label = tkinter.Label(self._base, text=text)
         self._label.bind("<Button-1>", self._on_click)
         self._label.pack()
         self.on_click: Callable[[Widget], None] | None = None

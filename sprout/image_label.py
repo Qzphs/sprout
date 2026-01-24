@@ -10,7 +10,7 @@ class ImageLabel(Widget):
 
     def __init__(self, parent: Container, image: Image):
         super().__init__(parent)
-        self._label = tkinter.Label(self.base, image=image.base)
+        self._label = tkinter.Label(self._base, image=image._base)
         self._image = image
         self._label.bind("<Button-1>", self._on_click)
         self._label.pack()
@@ -23,24 +23,24 @@ class ImageLabel(Widget):
 
     @property
     def border_colour(self):
-        if self.base.cget("bg") == self.parent.base.cget("bg"):
+        if self._base.cget("bg") == self.parent._base.cget("bg"):
             return None
-        return self.base.cget("bg")
+        return self._base.cget("bg")
 
     @border_colour.setter
     def border_colour(self, border_colour: str | None):
         if border_colour is None:
-            self.base.config(bg=self.parent.base.cget("bg"))
+            self._base.config(bg=self.parent._base.cget("bg"))
         else:
-            self.base.config(bg=border_colour)
+            self._base.config(bg=border_colour)
 
     @property
     def border_width(self):
-        return self.base.cget("bd")
+        return self._base.cget("bd")
 
     @border_width.setter
     def border_width(self, border_width: int):
-        self.base.config(bd=border_width)
+        self._base.config(bd=border_width)
 
     @property
     def image(self):
@@ -48,5 +48,5 @@ class ImageLabel(Widget):
 
     @image.setter
     def image(self, image: Image):
-        self._label.config(image=image.base)
+        self._label.config(image=image._base)
         self._image = image
