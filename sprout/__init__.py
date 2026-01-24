@@ -18,10 +18,12 @@ __all__ = [
     "Frame",
     "ImageLabel",
     "Image",
+    "LEFT",
     "N",
     "NE",
     "NW",
     "OFFSCREEN",
+    "RIGHT",
     "S",
     "SE",
     "SW",
@@ -33,7 +35,20 @@ __all__ = [
 ]
 
 from sprout.application import Application, Screen
-from sprout.constants import NW, N, NE, E, SE, S, SW, W, CENTRE, OFFSCREEN
+from sprout.constants import (
+    NW,
+    N,
+    NE,
+    E,
+    SE,
+    S,
+    SW,
+    W,
+    LEFT,
+    CENTRE,
+    RIGHT,
+    OFFSCREEN,
+)
 from sprout.dropdown import Dropdown
 from sprout.entry import Entry
 from sprout.font import Font
