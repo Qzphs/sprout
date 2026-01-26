@@ -26,6 +26,7 @@ __all__ = [
     "RIGHT",
     "S",
     "SE",
+    "Spoiler",
     "SW",
     "Screen",
     "ScrollableFrame",
@@ -57,6 +58,7 @@ from sprout.frame import Frame
 from sprout.image_label import ImageLabel
 from sprout.image import Image
 from sprout.scrollable_frame import ScrollableFrame
+from sprout.spoiler import Spoiler
 from sprout.text_area import TextArea
 from sprout.text_label import TextLabel
 from sprout.widget import Widget, Container
