@@ -41,7 +41,7 @@ class Spoiler(Widget):
         return self._back_text
 
     @back_text.setter
-    def front_text(self, back_text: str):
+    def back_text(self, back_text: str):
         self._back_text = back_text
         self._update()
 
