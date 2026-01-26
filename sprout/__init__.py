@@ -1,5 +1,5 @@
 """
-Sprout v0.3
+Sprout v0.4
 
 Mini GUI package built on top of tkinter. It's not particularly complete
 (and doesn't try to be) but it covers my most common use cases.
@@ -25,11 +25,11 @@ __all__ = [
     "OFFSCREEN",
     "RIGHT",
     "S",
+    "Screen",
+    "ScrollableFrame",
     "SE",
     "Spoiler",
     "SW",
-    "Screen",
-    "ScrollableFrame",
     "TextArea",
     "TextLabel",
     "W",
