@@ -52,4 +52,4 @@ class TextArea(Widget):
 
     @font.setter
     def font(self, font: Font):
-        self._text.config(font=font.tkinter())
+        self._text.config(font=font._tkinter())

@@ -43,4 +43,4 @@ class Dropdown(Widget):
 
     @font.setter
     def font(self, font: Font):
-        self._dropdown.config(font=font.tkinter())
+        self._dropdown.config(font=font._tkinter())

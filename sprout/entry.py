@@ -35,7 +35,7 @@ class Entry(Widget):
 
     @font.setter
     def font(self, font: Font):
-        self._entry.config(font=font.tkinter())
+        self._entry.config(font=font._tkinter())
 
     @property
     def value(self):

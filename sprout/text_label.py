@@ -43,7 +43,7 @@ class TextLabel(Widget):
 
     @font.setter
     def font(self, font: Font):
-        self._label.config(font=font.tkinter())
+        self._label.config(font=font._tkinter())
 
     @property
     def text(self) -> str:

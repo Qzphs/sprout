@@ -60,7 +60,7 @@ class Font:
             strikethrough=strikethrough if strikethrough is not None else strikethrough,
         )
 
-    def tkinter(self):
+    def _tkinter(self):
         return tkinter.font.Font(
             family=self.family,
             size=self.size,
