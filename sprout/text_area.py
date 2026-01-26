@@ -19,6 +19,7 @@ class TextArea(Widget):
 
     @property
     def background_colour(self):
+        """Same as tkinter's bg."""
         if self._text.cget("bg") == self.parent._base.cget("bg"):
             return None
         return self._text.cget("bg")
@@ -32,6 +33,7 @@ class TextArea(Widget):
 
     @property
     def colour(self):
+        """Same as tkinter's fg."""
         return self._text.cget("fg")
 
     @colour.setter
@@ -40,6 +42,11 @@ class TextArea(Widget):
 
     @property
     def font(self):
+        """
+        Similar to tkinter's font.
+
+        This property is a sprout.Font object, not a tkinter font name.
+        """
         tkinter_font = tkinter.font.nametofont(self._text.cget("font"))
         return Font.from_tkinter(tkinter_font)
 

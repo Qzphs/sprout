@@ -44,6 +44,13 @@ class Font:
         underline: bool | None = None,
         strikethrough: bool | None = None,
     ):
+        """
+        Create a copy of this font.
+        
+        Individual font properties can be changed using the
+        corresponding parameter, or default to same as the original if
+        left blank.
+        """
         return Font(
             family=family if family is not None else self.family,
             size=size if size is not None else self.size,

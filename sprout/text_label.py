@@ -24,6 +24,7 @@ class TextLabel(Widget):
 
     @property
     def colour(self):
+        """Same as tkinter's fg."""
         return self._label.cget("fg")
 
     @colour.setter
@@ -32,6 +33,11 @@ class TextLabel(Widget):
 
     @property
     def font(self):
+        """
+        Similar to tkinter's font.
+
+        This property is a sprout.Font object, not a tkinter font name.
+        """
         tkinter_font = tkinter.font.nametofont(self._label.cget("font"))
         return Font.from_tkinter(tkinter_font)
 
@@ -41,6 +47,7 @@ class TextLabel(Widget):
 
     @property
     def text(self) -> str:
+        """Same as tkinter's text."""
         return self._label.cget("text")
 
     @text.setter
@@ -49,6 +56,7 @@ class TextLabel(Widget):
 
     @property
     def wraplength(self) -> int:
+        """Same as tkinter's wraplength."""
         return self._label.cget("wraplength")
 
     @wraplength.setter

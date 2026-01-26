@@ -25,6 +25,11 @@ class Entry(Widget):
 
     @property
     def font(self):
+        """
+        Similar to tkinter's font.
+
+        This property is a sprout.Font object, not a tkinter font name.
+        """
         tkinter_font = tkinter.font.nametofont(self._entry.cget("font"))
         return Font.from_tkinter(tkinter_font)
 
@@ -34,6 +39,7 @@ class Entry(Widget):
 
     @property
     def value(self):
+        """Same as tkinter's value."""
         return self._entry.get()
 
     @value.setter
@@ -42,6 +48,7 @@ class Entry(Widget):
 
     @property
     def width(self):
+        """Same as tkinter's width."""
         return self._entry.cget("width")
 
     @width.setter

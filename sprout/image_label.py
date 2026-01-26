@@ -23,6 +23,7 @@ class ImageLabel(Widget):
 
     @property
     def border_colour(self):
+        """Same as tkinter's bg."""
         if self._base.cget("bg") == self.parent._base.cget("bg"):
             return None
         return self._base.cget("bg")
@@ -36,6 +37,7 @@ class ImageLabel(Widget):
 
     @property
     def border_width(self):
+        """Same as tkinter's bd."""
         return self._base.cget("bd")
 
     @border_width.setter
@@ -44,6 +46,12 @@ class ImageLabel(Widget):
 
     @property
     def image(self):
+        """
+        Similar to tkinter's image.
+        
+        This property is a sprout.Image object, not a tkinter.PhotoImage
+        object.
+        """
         return self._image
 
     @image.setter

@@ -37,6 +37,7 @@ class Spoiler(Widget):
 
     @property
     def back_text(self):
+        """The text displayed when this spoiler is revealed."""
         return self._back_text
 
     @back_text.setter
@@ -46,6 +47,7 @@ class Spoiler(Widget):
 
     @property
     def front_text(self):
+        """The text displayed when this spoiler is unrevealed."""
         return self._front_text
 
     @front_text.setter
@@ -55,6 +57,7 @@ class Spoiler(Widget):
 
     @property
     def revealed(self):
+        """Whether this spoiler is revealed."""
         return self._revealed
 
     @revealed.setter
@@ -64,6 +67,7 @@ class Spoiler(Widget):
 
     @property
     def background_colour(self):
+        """Same as tkinter's bg."""
         if self._base.cget("bg") == self.parent._base.cget("bg"):
             return None
         return self._base.cget("bg")
@@ -77,6 +81,7 @@ class Spoiler(Widget):
 
     @property
     def colour(self):
+        """Same as tkinter's fg."""
         return self._label.cget("fg")
 
     @colour.setter
@@ -85,6 +90,11 @@ class Spoiler(Widget):
 
     @property
     def font(self):
+        """
+        Similar to tkinter's font.
+
+        This property is a sprout.Font object, not a tkinter font name.
+        """
         tkinter_font = tkinter.font.nametofont(self._label.cget("font"))
         return Font.from_tkinter(tkinter_font)
 

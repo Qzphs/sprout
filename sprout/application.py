@@ -42,6 +42,7 @@ class Application:
 
 
 class Screen(Container):
+    """Similar to tkinter.Frame, but occupies the entire window."""
 
     def __init__(self, parent: Application):
         self._application = parent
@@ -61,6 +62,7 @@ class Screen(Container):
 
     @property
     def background_colour(self):
+        """Same as tkinter's bg."""
         return self._base.cget("bg")
 
     @background_colour.setter

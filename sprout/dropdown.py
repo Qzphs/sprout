@@ -28,10 +28,16 @@ class Dropdown(Widget):
 
     @property
     def value(self):
+        """Same as tkinter's value."""
         return self._variable.get()
 
     @property
     def font(self):
+        """
+        Similar to tkinter's font.
+
+        This property is a sprout.Font object, not a tkinter font name.
+        """
         tkinter_font = tkinter.font.nametofont(self._dropdown.cget("font"))
         return Font.from_tkinter(tkinter_font)
 

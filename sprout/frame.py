@@ -20,6 +20,7 @@ class Frame(Container):
 
     @property
     def background_colour(self):
+        """Same as tkinter's bg."""
         if self._base.cget("bg") == self.parent._base.cget("bg"):
             return None
         return self._base.cget("bg")
