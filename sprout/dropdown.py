@@ -18,8 +18,8 @@ class Dropdown(Widget):
         self.options = options
         self._dropdown = tkinter.OptionMenu(self._base, self._variable, *options)
         self._dropdown.pack()
-        self.on_write: Callable[[Widget], None] | None = None
         self.font = Font.default()
+        self.on_write: Callable[[Widget], None] | None = None
 
     def _on_write(self, *args):
         if self.on_write is None:
@@ -38,9 +38,9 @@ class Dropdown(Widget):
 
         This property is a sprout.Font object, not a tkinter font name.
         """
-        tkinter_font = tkinter.font.nametofont(self._dropdown.cget("font"))
-        return Font.from_tkinter(tkinter_font)
+        return self._font
 
     @font.setter
     def font(self, font: Font):
+        self._font = font
         self._dropdown.config(font=font._tkinter())

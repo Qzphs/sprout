@@ -14,8 +14,8 @@ class TextLabel(Widget):
         self._label = tkinter.Label(self._base, text=text)
         self._label.bind("<Button-1>", self._on_click)
         self._label.pack()
-        self.on_click: Callable[[Widget], None] | None = None
         self.font = Font.default()
+        self.on_click: Callable[[Widget], None] | None = None
 
     def _on_click(self, event: tkinter.Event):
         if self.on_click is None:
@@ -38,11 +38,11 @@ class TextLabel(Widget):
 
         This property is a sprout.Font object, not a tkinter font name.
         """
-        tkinter_font = tkinter.font.nametofont(self._label.cget("font"))
-        return Font.from_tkinter(tkinter_font)
+        return self._font
 
     @font.setter
     def font(self, font: Font):
+        self._font = font
         self._label.config(font=font._tkinter())
 
     @property

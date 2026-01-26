@@ -24,17 +24,6 @@ class Font:
     def default(cls):
         return Font()
 
-    @classmethod
-    def from_tkinter(cls, tkinter_font: tkinter.font.Font):
-        return Font(
-            family=tkinter_font.actual("family"),
-            size=int(tkinter_font.actual("size")),
-            bold=tkinter_font.actual("weight") != tkinter.font.NORMAL,
-            italic=tkinter_font.actual("slant") != tkinter.font.ROMAN,
-            underline=tkinter_font.actual("underline"),
-            strikethrough=tkinter_font.actual("overstrike"),
-        )
-
     def copy(
         self,
         family: str | None = None,
@@ -46,19 +35,24 @@ class Font:
     ):
         """
         Create a copy of this font.
-        
+
         Individual font properties can be changed using the
         corresponding parameter, or default to same as the original if
         left blank.
         """
-        return Font(
-            family=family if family is not None else self.family,
-            size=size if size is not None else self.size,
-            bold=bold if bold is not None else self.bold,
-            italic=italic if italic is not None else self.italic,
-            underline=underline if underline is not None else self.underline,
-            strikethrough=strikethrough if strikethrough is not None else strikethrough,
-        )
+        if family is None:
+            family = self.family
+        if size is None:
+            size = self.size
+        if bold is None:
+            bold = self.bold
+        if italic is None:
+            italic = self.italic
+        if underline is None:
+            underline = self.underline
+        if strikethrough is None:
+            strikethrough = self.strikethrough
+        return Font(family, size, bold, italic, underline, strikethrough)
 
     def _tkinter(self):
         return tkinter.font.Font(

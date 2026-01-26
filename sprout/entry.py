@@ -15,8 +15,8 @@ class Entry(Widget):
         self._variable.trace_add("write", self._on_write)
         self._entry = tkinter.Entry(self._base, textvariable=self._variable)
         self._entry.pack()
-        self.on_write: Callable[[Widget], None] | None = None
         self.font = Font.default()
+        self.on_write: Callable[[Widget], None] | None = None
 
     def _on_write(self, *args):
         if self.on_write is None:
@@ -30,11 +30,11 @@ class Entry(Widget):
 
         This property is a sprout.Font object, not a tkinter font name.
         """
-        tkinter_font = tkinter.font.nametofont(self._entry.cget("font"))
-        return Font.from_tkinter(tkinter_font)
+        return self._font
 
     @font.setter
     def font(self, font: Font):
+        self._font = font
         self._entry.config(font=font._tkinter())
 
     @property

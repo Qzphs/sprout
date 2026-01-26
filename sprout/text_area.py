@@ -47,9 +47,9 @@ class TextArea(Widget):
 
         This property is a sprout.Font object, not a tkinter font name.
         """
-        tkinter_font = tkinter.font.nametofont(self._text.cget("font"))
-        return Font.from_tkinter(tkinter_font)
+        return self._font
 
     @font.setter
     def font(self, font: Font):
+        self._font = font
         self._text.config(font=font._tkinter())
