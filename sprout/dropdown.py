@@ -1,46 +1,55 @@
 import tkinter
-import tkinter.font
 from typing import Callable
 
-from sprout.font import Font
-from sprout.widget import Container, Widget
+from sprout.widget import Widget
 
 
 class Dropdown(Widget):
-    """Same as tkinter.OptionMenu."""
+    """
+    Basic widget that allows user to select an option from a list.
 
-    def __init__(self, parent: Container, options: list[str]):
-        super().__init__(parent)
-        assert len(options) > 0
-        self._variable = tkinter.StringVar(self._base)
-        self._variable.set(options[0])
-        self._variable.trace_add("write", self._on_write)
+    This class is analogous to tkinter.OptionMenu.
+    """
+
+    def __init__(self, options: list[str]):
+        super().__init__()
+        if len(options) == 0:
+            raise ValueError("options cannot be empty")
         self.options = options
-        self._dropdown = tkinter.OptionMenu(self._base, self._variable, *options)
-        self._dropdown.pack()
-        self.font = Font.default()
-        self.on_write: Callable[[Widget], None] | None = None
+        self._value = options[0]
 
-    def _on_write(self, *args):
-        if self.on_write is None:
-            return
-        self.on_write(self)
+        self._tk_dropdown: tkinter.OptionMenu | None = None
+        self._tk_variable: tkinter.StringVar | None = None
+        self._on_write_callback: Callable[[Widget], None] | None = None
+
+    def _create(self, base: tkinter.Frame):
+        super()._create(base)
+        self._tk_variable = tkinter.StringVar()
+        self._tk_variable.set(self.options[0])
+        self._tk_variable.trace_add("write", self._on_write)
+        self._tk_dropdown = tkinter.OptionMenu(
+            self._root_frame,
+            self._tk_variable,
+            *self.options,
+        )
+        self._tk_dropdown.pack_configure()
+
+    def on_write(self, func: Callable[[Widget], None]):
+        """
+        Register a function to be called when a selection is made.
+
+        The function should accept as an argument the widget that was
+        interacted with.
+        """
+        self._on_write_callback = func
+        return func
+
+    def _on_write(self, var: str, index: str, mode: str):
+        self._value = self._tk_variable.get()
+        if self._on_write_callback is not None:
+            self._on_write_callback(self)
 
     @property
     def value(self):
-        """Same as tkinter's value."""
-        return self._variable.get()
-
-    @property
-    def font(self):
-        """
-        Similar to tkinter's font.
-
-        This property is a sprout.Font object, not a tkinter font name.
-        """
-        return self._font
-
-    @font.setter
-    def font(self, font: Font):
-        self._font = font
-        self._dropdown.config(font=font._tkinter())
+        """The selected option."""
+        return self._value

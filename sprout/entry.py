@@ -1,56 +1,91 @@
 import tkinter
-import tkinter.font
 from typing import Callable
 
-from sprout.font import Font
+from sprout.constants import DEFAULT_BACKGROUND_COLOUR, DEFAULT_COLOUR, LEFT
 from sprout.widget import Widget
 
 
 class Entry(Widget):
-    """Same as tkinter.Entry."""
+    """
+    Basic widget that displays some text.
 
-    def __init__(self, parent):
-        super().__init__(parent)
-        self._variable = tkinter.StringVar(self._base)
-        self._variable.trace_add("write", self._on_write)
-        self._entry = tkinter.Entry(self._base, textvariable=self._variable)
-        self._entry.pack()
-        self.font = Font.default()
-        self.on_write: Callable[[Widget], None] | None = None
+    This class is analogous to tkinter.Entry.
+    """
 
-    def _on_write(self, *args):
-        if self.on_write is None:
-            return
-        self.on_write(self)
+    def __init__(self):
+        super().__init__()
+        self._value = ""
 
-    @property
-    def font(self):
+        self._tk_entry: tkinter.Entry | None = None
+        self._tk_variable: tkinter.StringVar | None = None
+        self._on_write_callback: Callable[[Widget], None] | None = None
+
+        self._justify = LEFT
+        self._width = 20
+
+    def _create(self, base: tkinter.Frame):
+        super()._create(base)
+        self._tk_variable = tkinter.StringVar()
+        self._tk_variable.trace_add("write", self._on_write)
+        self._tk_entry = tkinter.Entry(
+            self._root_frame,
+            bg=DEFAULT_BACKGROUND_COLOUR,
+            fg=DEFAULT_COLOUR,
+            highlightthickness=0,
+            justify=self._justify,
+            textvariable=self._tk_variable,
+            width=self._width,
+        )
+        self._tk_entry.pack_configure()
+
+    def on_write(self, func: Callable[[Widget], None]):
         """
-        Similar to tkinter's font.
+        Register a function to be called when text is entered.
 
-        This property is a sprout.Font object, not a tkinter font name.
+        The function should accept as an argument the widget that was
+        interacted with.
         """
-        return self._font
+        self._on_write_callback = func
+        return func
 
-    @font.setter
-    def font(self, font: Font):
-        self._font = font
-        self._entry.config(font=font._tkinter())
+    def _on_write(self, var: str, index: str, mode: str):
+        self._value = self._tk_variable.get()
+        if self._on_write_callback is not None:
+            self._on_write_callback(self)
 
     @property
     def value(self):
-        """Same as tkinter's value."""
-        return self._entry.get()
+        """The value written in this entry."""
+        return self._value
 
     @value.setter
     def value(self, value: str):
-        self._variable.set(value)
+        self._value = value
+        if self.created:
+            self._tk_variable.set(value)
+
+    @property
+    def justify(self):
+        """
+        The alignment of lines relative to each other within the text.
+
+        Possible values are LEFT, CENTRE, RIGHT.
+        """
+        return self._justify
+
+    @justify.setter
+    def justify(self, justify: str):
+        self._justify = justify
+        if self.created:
+            self._tk_entry.configure(justify=justify)
 
     @property
     def width(self):
-        """Same as tkinter's width."""
-        return self._entry.cget("width")
+        """The character width of this widget."""
+        return self._width
 
     @width.setter
     def width(self, width: int):
-        self._entry.config(width=width)
+        self._width = width
+        if self.created:
+            self._tk_entry.configure(width=width)

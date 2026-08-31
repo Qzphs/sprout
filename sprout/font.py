@@ -2,7 +2,7 @@ import tkinter.font
 
 
 class Font:
-    """Same as tkinter.font.Font."""
+    """Substitute tkinter.font.Font."""
 
     def __init__(
         self,
@@ -13,6 +13,7 @@ class Font:
         underline: bool = False,
         strikethrough: bool = False,
     ):
+        """Initialise self."""
         self.family = family
         self.size = size
         self.bold = bold
@@ -22,6 +23,7 @@ class Font:
 
     @classmethod
     def default(cls):
+        """Create a default font object."""
         return Font()
 
     def copy(
@@ -54,7 +56,8 @@ class Font:
             strikethrough = self.strikethrough
         return Font(family, size, bold, italic, underline, strikethrough)
 
-    def _tkinter(self):
+    def tkinter(self):
+        """Convert self to tkinter.font.Font."""
         return tkinter.font.Font(
             family=self.family,
             size=self.size,

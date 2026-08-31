@@ -1,5 +1,7 @@
 import tkinter
 
+DEFAULT_COLOUR = "#191919"
+DEFAULT_BACKGROUND_COLOUR = "#cacaca"
 
 NW = tkinter.NW
 N = tkinter.N
